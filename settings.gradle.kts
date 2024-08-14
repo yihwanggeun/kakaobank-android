@@ -21,3 +21,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "kakaobank-android"
 include(":app")
+include(":core:domain")
+include(":core:data")
+include(":core:database")
+include(":core:designsystem")
+include(":core:model")
+include(":feature:login")
