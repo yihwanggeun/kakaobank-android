@@ -13,5 +13,9 @@ gradlePlugin {
             id = "kakaobank_android.android.library"
             implementationClass = "AndroidLibraryPlugin"
         }
+        register("androidLibraryCompose"){
+            id = "kakaobank_android.android.library.compose"
+            implementationClass = "AndroidLibraryComposePlugin"
+        }
     }
 }
