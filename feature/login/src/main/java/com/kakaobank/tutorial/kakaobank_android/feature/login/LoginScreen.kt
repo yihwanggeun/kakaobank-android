@@ -45,11 +45,9 @@ import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
-import com.kakaobank.tutorial.kakaobank_android.feature.login.ui.theme.KakaoBlack
-import com.kakaobank.tutorial.kakaobank_android.feature.login.ui.theme.KakaoYellow
-import com.kakaobank.tutorial.kakaobank_android.feature.login.ui.theme.KakaobankandroidTheme
-import com.kakaobank.tutorial.kakaobank_android.feature.login.ui.theme.appleSDGothicNeo
-import kotlin.io.path.Path
+import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoBlack
+import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoYellow
+import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.appleSDGothicNeo
 
 /*  Arrangment / Alignment 차이
     Alignment - Column, Row, Box에서 자식 요소들을 수평 또는 수직방향으로 정렬
@@ -61,7 +59,9 @@ import kotlin.io.path.Path
     Row - HorizontalArrangement
 * */
 @Composable
-fun LoginScreen(){
+fun LoginScreen(
+    onLoginSuccess: () -> Unit
+){
     val context = LocalContext.current
 
     Column(
@@ -120,7 +120,7 @@ fun LoginScreen(){
             painter = painterResource(id = R.drawable.kakao_login_medium_wide),
             contentDescription = "Another Button",
             onClick = { // 카카오톡으로 로그인
-                createKakaoToken(context)
+                createKakaoToken(context, onLoginSuccess)
                       },
         )
         Spacer(modifier = Modifier.height(30.dp))
@@ -140,13 +140,14 @@ fun Dot(
     )
 }
 
-fun createKakaoToken(context: android.content.Context) {
+fun createKakaoToken(context: android.content.Context, onLoginSuccess: () -> Unit) {
 
     val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
             Log.e(TAG, "카카오계정으로 로그인 실패", error)
         } else if (token != null) {
             Log.i(TAG, "카카오계정으로 로그인 성공 ${token.accessToken}")
+            onLoginSuccess()
         }
     }
 
@@ -214,5 +215,5 @@ fun DotPreview () {
 @Preview(showBackground = true)
 @Composable
 fun LoginScreenPreview() {
-    LoginScreen()
+    LoginScreen(onLoginSuccess = {})
 }

@@ -1,4 +1,4 @@
-package com.kakaobank.tutorial.kakaobank_android.ui.theme
+package com.kakaobank.tutorial.kakaobank_android.feature.main.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

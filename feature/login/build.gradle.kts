@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("kakaobank_android.android.library.compose")
     id("kakaobank_android.android.library")
@@ -15,6 +17,14 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildConfigField(
+            "String",
+            "KAKAO_NATIVE_APP_KEY",
+            "\"${getLocalProperty("kakao_native_app_key", project)}\""
+        )
+        manifestPlaceholders["KAKAO_NATIVE_APP_KEY"] = getLocalProperty("kakao_native_app_key", project)
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -24,6 +34,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+        buildConfig = true  // BuildConfig 생성 기능 활성화
         compose = true
     }
     composeOptions {
@@ -44,6 +55,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation.compose)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
@@ -56,5 +68,18 @@ dependencies {
     implementation ("com.kakao.sdk:v2-friend:2.20.1") // 피커 API 모듈
     implementation ("com.kakao.sdk:v2-navi:2.20.1") // 카카오내비 API 모듈
     implementation ("com.kakao.sdk:v2-cert:2.20.1") // 카카오톡 인증 서비스 API 모듈
+
+    implementation(project(":core:designsystem"))
+    implementation(project(":feature:main"))
 }
 
+
+fun getLocalProperty(propertyName: String, project: Project): String {
+    val propertiesFile = File(project.rootDir, "local.properties")
+    if (propertiesFile.exists()) {
+        val properties = Properties()
+        properties.load(propertiesFile.inputStream())
+        return properties.getProperty(propertyName)
+    }
+    throw IllegalStateException("Property $propertyName not found in local.properties")
+}

@@ -1,4 +1,4 @@
-package com.kakaobank.tutorial.kakaobank_android.feature.login.ui.theme
+package com.kakaobank.tutorial.kakaobank_android.feature.main.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
