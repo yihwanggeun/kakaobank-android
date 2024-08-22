@@ -28,7 +28,7 @@ class LoginActivity : ComponentActivity() {
                             })
                         }
                         composable("main"){
-                            MainScreen()
+                            MainScreen(navController = navController)
                         }
                     }
                 }
