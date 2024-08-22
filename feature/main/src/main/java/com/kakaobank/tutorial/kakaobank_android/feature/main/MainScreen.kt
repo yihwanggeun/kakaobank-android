@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -29,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -38,6 +41,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.kakaobank.tutorial.kakaobank_android.R
+import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoBackground
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoBlack
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.appleSDGothicNeo
 import com.kakaobank.tutorial.kakaobank_android.feature.main.ui.theme.KakaobankandroidTheme
@@ -57,6 +61,9 @@ fun MainScreen(navController: NavController) {
 
     KakaobankandroidTheme {
         Scaffold(
+            topBar = {
+                MainTopBar()
+            },
             content = { paddingValues ->
                 NavHost(
                     navController = bottomNavController,
@@ -170,6 +177,38 @@ fun BottomBarItem(iconId: Int, label: String, isSelected: Boolean, onClick: () -
         )
     }
 }
+
+@Composable
+fun MainTopBar(){
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .statusBarsPadding()
+            .background(KakaoBackground)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
+            .height(56.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ){
+        Text(text = "이황근",
+            style = TextStyle(KakaoBlack, 24.sp, FontWeight.Bold, fontFamily = appleSDGothicNeo)
+        )
+        Spacer(modifier = Modifier.width(8.dp))
+        Box(modifier = Modifier.background(Color(0xFFF1F1F1), RoundedCornerShape(16.dp))){
+            Text( modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp) ,
+                text = "내 계좌",
+                style = TextStyle(KakaoBlack, 12.sp, FontWeight.Bold, fontFamily = appleSDGothicNeo)
+
+            )
+        }
+        Spacer(modifier = Modifier.size(20.dp).weight(1f))
+        Icon(
+            painter = painterResource(id = R.drawable.alarm),
+            contentDescription = "alarm",
+            modifier = Modifier
+                .size(20.dp)
+        )
+    }
+}
 @Composable
 fun HomeScreen() {
     Box(
@@ -217,6 +256,8 @@ fun MoreScreen() {
         Text("More Screen")
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Composable

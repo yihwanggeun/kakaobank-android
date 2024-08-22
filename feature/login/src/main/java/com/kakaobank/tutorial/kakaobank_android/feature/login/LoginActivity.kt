@@ -23,9 +23,10 @@ class LoginActivity : ComponentActivity() {
                 Surface(color = MaterialTheme.colorScheme.background){
                     NavHost(navController = navController, startDestination = "login"){
                         composable("login"){
-                            LoginScreen(onLoginSuccess = {
-                                navController.navigate("main")
-                            })
+                            MainScreen(navController = navController)
+//                            LoginScreen(onLoginSuccess = {
+//                                navController.navigate("main")
+//                            })
                         }
                         composable("main"){
                             MainScreen(navController = navController)

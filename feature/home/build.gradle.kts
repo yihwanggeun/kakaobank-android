@@ -6,3 +6,7 @@ plugins {
 android {
     namespace = "com.kakaobank.tutorial.kakaobank_android"
 }
+
+dependencies {
+    implementation(project(":core:designsystem"))
+}
