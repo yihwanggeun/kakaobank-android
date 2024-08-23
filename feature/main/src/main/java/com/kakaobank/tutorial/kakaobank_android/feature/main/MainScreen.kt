@@ -46,6 +46,7 @@ import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoBla
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.appleSDGothicNeo
 import com.kakaobank.tutorial.kakaobank_android.feature.main.ui.theme.KakaobankandroidTheme
 import com.kakaobank.tutorial.kakaobank_android.feature.home.HomeScreen
+import com.kakaobank.tutorial.kakaobank_android.feature.transfer.TransferDetailScreen
 import com.kakaobank.tutorial.kakaobank_android.feature.transfer.TransferScreen
 
 @Composable
@@ -78,6 +79,8 @@ fun MainScreen(navController: NavController) {
                     composable("products") { ProductsScreen() }
                     composable("more") { MoreScreen() }
                     composable("transfer") { TransferScreen(navController = bottomNavController) }
+                    composable("transferDetail") { TransferDetailScreen(navController = bottomNavController) }
+
                 }
             },
             bottomBar = {
