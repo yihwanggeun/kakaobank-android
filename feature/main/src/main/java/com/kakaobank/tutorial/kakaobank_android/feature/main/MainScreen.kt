@@ -45,10 +45,13 @@ import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoBac
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoBlack
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.appleSDGothicNeo
 import com.kakaobank.tutorial.kakaobank_android.feature.main.ui.theme.KakaobankandroidTheme
+import com.kakaobank.tutorial.kakaobank_android.feature.home.HomeScreen
+import com.kakaobank.tutorial.kakaobank_android.feature.transfer.TransferScreen
 
 @Composable
 fun MainScreen(navController: NavController) {
     val bottomNavController = rememberNavController()
+    val rootNavController = rememberNavController()
 
     /*
         Scaffold - Material Design의 기본 레이아웃을 제공하는 컴포저블
@@ -70,10 +73,11 @@ fun MainScreen(navController: NavController) {
                     startDestination = "home",
                     Modifier.padding(paddingValues)
                 ) {
-                    composable("home") { HomeScreen() }
+                    composable("home") { HomeScreen(navController = bottomNavController) }
                     composable("benefits") { BenefitsScreen() }
                     composable("products") { ProductsScreen() }
                     composable("more") { MoreScreen() }
+                    composable("transfer") { TransferScreen(navController = bottomNavController) }
                 }
             },
             bottomBar = {
@@ -99,6 +103,7 @@ fun MainScreen(navController: NavController) {
 
 
 }
+
 
 @Composable
 fun MainBottomBar(selectedIndex: Int, onTabSelected: (Int) -> Unit) {
@@ -200,24 +205,15 @@ fun MainTopBar(){
 
             )
         }
-        Spacer(modifier = Modifier.size(20.dp).weight(1f))
+        Spacer(modifier = Modifier
+            .size(20.dp)
+            .weight(1f))
         Icon(
             painter = painterResource(id = R.drawable.alarm),
             contentDescription = "alarm",
             modifier = Modifier
                 .size(20.dp)
         )
-    }
-}
-@Composable
-fun HomeScreen() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White),
-        contentAlignment = Alignment.Center
-    ) {
-        Text("Home Screen")
     }
 }
 
