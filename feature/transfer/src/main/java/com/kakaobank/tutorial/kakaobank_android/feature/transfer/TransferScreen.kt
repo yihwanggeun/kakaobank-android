@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -35,17 +34,14 @@ import androidx.compose.ui.text.style.TextAlign.Companion.Center
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.kakaobank.tutorial.kakaobank_android.R
-import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoBackground
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoBlack
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaobankandroidTheme
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.appleSDGothicNeo
-import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.toss
 
 @Composable
-fun TransferScreen(navController: NavController){
+fun TransferScreen(onNavigateToDetail: () -> Unit) {
     var inputText by remember { mutableStateOf("1002455041732") }
     KakaobankandroidTheme {
 
@@ -178,7 +174,7 @@ fun TransferScreen(navController: NavController){
                 Spacer(modifier = Modifier.weight(1f).background(Color.Blue))
                 Text(
                     modifier = Modifier.clickable {
-                        navController.navigate("transferDetail")
+                        onNavigateToDetail()
                     },
                     text = ">",
                     fontSize = 12.sp,
@@ -195,6 +191,6 @@ fun TransferScreen(navController: NavController){
 @Preview
 @Composable
 fun PreviewTransferScreen(){
-    TransferScreen(navController = rememberNavController())
+    TransferScreen(onNavigateToDetail = {})
 
 }

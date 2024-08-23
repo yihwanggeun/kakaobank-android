@@ -33,9 +33,6 @@ import androidx.compose.ui.text.style.TextAlign.Companion.Center
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.kakaobank.tutorial.kakaobank_android.R
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.component.KakaoCard
@@ -46,10 +43,9 @@ import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoYel
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.appleSDGothicNeo
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.apple_bold
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.toss
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
-import com.kakaobank.tutorial.kakaobank_android.feature.transfer.TransferScreen
+
 @Composable
-fun HomeScreen(navController: NavController) {
+fun HomeScreen(onTransferClick: () -> Unit) {
 
 
     Column(
@@ -61,7 +57,7 @@ fun HomeScreen(navController: NavController) {
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(8.dp)
         ){
-        AccountCard(navController)
+        AccountCard(onTransferClick)
         AddCard()
         Spacer(modifier = Modifier.weight(1f))
         Row(
@@ -76,7 +72,7 @@ fun HomeScreen(navController: NavController) {
 }
 
 @Composable
-fun AccountCard(navController: NavController) {
+fun AccountCard(onTransferClick: () -> Unit) {
     KakaoCard(modifier = Modifier.height(120.dp), color = KakaoYellow){
         Column(modifier = Modifier
                         .padding(vertical = 16.dp, horizontal = 16.dp)) {
@@ -160,7 +156,7 @@ fun AccountCard(navController: NavController) {
                 Box(modifier = Modifier
                     .background(Color(0x0A000000), RoundedCornerShape(16.dp))
                     .clickable {
-                        navController.navigate("transfer")
+                        onTransferClick()
                     })
                 {
                     Text( modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp) ,
@@ -232,5 +228,5 @@ fun FunctionCard(
 @Preview
 @Composable
 private fun HomeScreenPreview() {
-    HomeScreen(navController = rememberNavController())
+    HomeScreen(onTransferClick = {})
 }

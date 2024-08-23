@@ -10,7 +10,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaobankandroidTheme
+import com.kakaobank.tutorial.kakaobank_android.feature.main.MainRoute
 import com.kakaobank.tutorial.kakaobank_android.feature.main.MainScreen
+import com.kakaobank.tutorial.kakaobank_android.feature.main.mainNavGraph
 
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,17 +23,7 @@ class LoginActivity : ComponentActivity() {
                 val navController = rememberNavController()
 
                 Surface(color = MaterialTheme.colorScheme.background){
-                    NavHost(navController = navController, startDestination = "login"){
-                        composable("login"){
-                            MainScreen(navController = navController)
-//                            LoginScreen(onLoginSuccess = {
-//                                navController.navigate("main")
-//                            })
-                        }
-                        composable("main"){
-                            MainScreen(navController = navController)
-                        }
-                    }
+                    AppNavigation()
                 }
 
             }

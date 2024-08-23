@@ -43,7 +43,7 @@ import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.Kakaoban
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.appleSDGothicNeo
 
 @Composable
-fun TransferDetailScreen(navController: NavController) {
+fun TransferDetailScreen() {
     val amount = remember { mutableStateOf("") } // 입력된 금액을 저장하는 상태
 
     KakaobankandroidTheme {
@@ -203,5 +203,5 @@ fun KeypadButton(text: String, onClick: () -> Unit, size: Dp) {
 @Preview(showBackground = true)
 @Composable
 fun TransferDetailScreenPreview(){
-    TransferDetailScreen(navController = rememberNavController())
+    TransferDetailScreen()
 }
