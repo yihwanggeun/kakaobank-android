@@ -1,7 +1,6 @@
 package com.kakaobank.tutorial.kakaobank_android.feature.main
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -18,7 +17,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Divider
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -31,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -44,7 +41,9 @@ import com.kakaobank.tutorial.kakaobank_android.R
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoBackground
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoBlack
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.appleSDGothicNeo
+import com.kakaobank.tutorial.kakaobank_android.feature.home.HomeRoute
 import com.kakaobank.tutorial.kakaobank_android.feature.main.ui.theme.KakaobankandroidTheme
+import com.kakaobank.tutorial.kakaobank_android.feature.home.HomeScreen
 
 @Composable
 fun MainScreen(navController: NavController) {
@@ -67,13 +66,14 @@ fun MainScreen(navController: NavController) {
             content = { paddingValues ->
                 NavHost(
                     navController = bottomNavController,
-                    startDestination = "home",
+                    startDestination = HomeRoute.route,
                     Modifier.padding(paddingValues)
                 ) {
-                    composable("home") { HomeScreen() }
-                    composable("benefits") { BenefitsScreen() }
-                    composable("products") { ProductsScreen() }
-                    composable("more") { MoreScreen() }
+                    composable(HomeRoute.route) {
+                        HomeScreen(
+                            onTransferClick = { navController.navigate("transfer_flow") }
+                        )
+                    }
                 }
             },
             bottomBar = {
@@ -99,6 +99,7 @@ fun MainScreen(navController: NavController) {
 
 
 }
+
 
 @Composable
 fun MainBottomBar(selectedIndex: Int, onTabSelected: (Int) -> Unit) {
@@ -200,24 +201,15 @@ fun MainTopBar(){
 
             )
         }
-        Spacer(modifier = Modifier.size(20.dp).weight(1f))
+        Spacer(modifier = Modifier
+            .size(20.dp)
+            .weight(1f))
         Icon(
             painter = painterResource(id = R.drawable.alarm),
             contentDescription = "alarm",
             modifier = Modifier
                 .size(20.dp)
         )
-    }
-}
-@Composable
-fun HomeScreen() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White),
-        contentAlignment = Alignment.Center
-    ) {
-        Text("Home Screen")
     }
 }
 

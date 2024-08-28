@@ -10,6 +10,8 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
+
     }
 }
 dependencyResolutionManagement {
@@ -18,7 +20,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven { url = java.net.URI("https://devrepo.kakao.com/nexus/content/groups/public/") }
-
+        maven { url = java.net.URI("https://oss.sonatype.org/content/repositories/snapshots") }
     }
 }
 
@@ -32,3 +34,4 @@ include(":core:model")
 include(":feature:login")
 include(":feature:main")
 include(":feature:home")
+include(":feature:transfer")

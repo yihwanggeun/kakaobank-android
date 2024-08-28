@@ -3,7 +3,8 @@ import java.util.Properties
 plugins {
     id("kakaobank_android.android.library.compose")
     id("kakaobank_android.android.library")
-    alias(libs.plugins.jetbrains.kotlin.android)
+    id("kakaobank_android.android.hilt")
+    alias(libs.plugins.org.jetbrains.kotlin.android)
 }
 
 android {
@@ -27,11 +28,11 @@ android {
 
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         buildConfig = true  // BuildConfig 생성 기능 활성화
@@ -56,6 +57,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation.compose)
+    implementation(project(":feature:transfer"))
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)

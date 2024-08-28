@@ -43,6 +43,13 @@ val appleSDGothicNeo = FontFamily(
     Font(R.font.apple_sd_gothic_neo, FontWeight.Normal)
 )
 
+val toss = FontFamily(
+    Font(R.font.toss, FontWeight.Normal)
+)
+
+val apple_bold = FontFamily(
+    Font(R.font.apple_bold, FontWeight.Bold)
+)
 
 @Composable
 fun KakaobankandroidTheme(

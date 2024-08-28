@@ -1,6 +1,7 @@
 plugins {
     id("kakaobank_android.android.library")
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
+    id("kakaobank_android.android.hilt")
 }
 
 
@@ -11,6 +12,11 @@ android {
 }
 
 dependencies {
+    // Retrofit
+    implementation (libs.retrofit)
+
+    // Retrofit과 함께 사용할 JSON 변환 라이브러리
+    implementation (libs.converter.gson)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
