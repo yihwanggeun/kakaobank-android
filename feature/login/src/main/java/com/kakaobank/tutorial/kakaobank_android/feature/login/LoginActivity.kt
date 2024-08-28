@@ -13,7 +13,9 @@ import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.Kakaoban
 import com.kakaobank.tutorial.kakaobank_android.feature.main.MainRoute
 import com.kakaobank.tutorial.kakaobank_android.feature.main.MainScreen
 import com.kakaobank.tutorial.kakaobank_android.feature.main.mainNavGraph
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

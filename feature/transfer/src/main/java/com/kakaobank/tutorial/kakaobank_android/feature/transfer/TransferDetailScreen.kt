@@ -1,17 +1,26 @@
 package com.kakaobank.tutorial.kakaobank_android.feature.transfer
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.BoxWithConstraints
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaobankandroidTheme
+import com.kakaobank.tutorial.kakaobank_android.feature.transfer.model.TransferViewModel
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,32 +28,27 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import com.kakaobank.tutorial.kakaobank_android.R
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoBlack
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaoYellow
-import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.KakaobankandroidTheme
 import com.kakaobank.tutorial.kakaobank_android.core.designsystem.theme.appleSDGothicNeo
+import dagger.hilt.android.lifecycle.HiltViewModel
+
 
 @Composable
-fun TransferDetailScreen() {
+fun TransferDetailScreen(
+    viewModel: TransferViewModel = hiltViewModel()
+) {
     val amount = remember { mutableStateOf("") } // 입력된 금액을 저장하는 상태
+    val transferResult by viewModel.transferResult.observeAsState()
 
     KakaobankandroidTheme {
         Column(modifier = Modifier.padding(16.dp)){
@@ -105,12 +109,24 @@ fun TransferDetailScreen() {
                     )
                 )
             }
-            Row(){
-
+            // Transfer 결과를 UI에 표시
+            transferResult?.let { result ->
+                // 성공적인 전송 결과를 UI에 표시
+                Text(text = "Transfer Successful: ${result.message}")
+            } ?: run {
+                // 결과가 없는 경우의 UI 표시
+                Text(text = "No Transfer Result")
             }
             Keypad(amount = amount) // amount 값을 Keypad에 전달
-            RoundedCornerButton(text = "다음", onClick = {})
-                
+            RoundedCornerButton(
+                text = "다음" ,
+                onClick= {
+                    Log.d("TransferDetailScreen", "다음 버튼 클릭")
+                    val amountValue = amount.value.toDoubleOrNull() ?: 0.0
+                    viewModel.transferMoney(from = "1", to = "2", amount = 300.0)
+                }
+            )
+
 
         }
     }

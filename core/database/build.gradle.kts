@@ -1,6 +1,6 @@
 plugins {
     id("kakaobank_android.android.library")
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
 }
 
 android {

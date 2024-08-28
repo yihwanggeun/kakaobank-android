@@ -2,7 +2,9 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
+    id("kakaobank_android.android.hilt")
+    alias(libs.plugins.compose.compiler)
 }
 
 android {
@@ -39,11 +41,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         buildConfig = true  // BuildConfig 생성 기능 활성화
@@ -91,6 +93,12 @@ dependencies {
     implementation ("com.kakao.sdk:v2-friend:2.20.1") // 피커 API 모듈
     implementation ("com.kakao.sdk:v2-navi:2.20.1") // 카카오내비 API 모듈
     implementation ("com.kakao.sdk:v2-cert:2.20.1") // 카카오톡 인증 서비스 API 모듈
+
+//    implementation(libs.hilt.core)
+//    implementation(libs.hilt.android)
+//    implementation(libs.hilt.android.compiler)
+//    implementation(libs.hilt.android.testing)
+//    implementation(libs.hilt.navigation.compose)
 
 }
 

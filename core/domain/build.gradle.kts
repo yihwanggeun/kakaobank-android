@@ -1,6 +1,8 @@
 plugins {
     id("kakaobank_android.android.library")
-    alias(libs.plugins.jetbrains.kotlin.android)
+    id("kakaobank_android.android.hilt")
+    alias(libs.plugins.org.jetbrains.kotlin.android)
+
 }
 
 
@@ -9,6 +11,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
